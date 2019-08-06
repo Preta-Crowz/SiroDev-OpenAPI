@@ -74,7 +74,7 @@ def urls():
 @app.route('/word', methods=['POST'])
 def get_word():
     rdat = request.form.to_dict()
-    if rdat == {}: rdat = request.json()
+    if rdat == {}: rdat = request.json
     word = rdat["word"]
     lms = rdat.get('listing', '0')
     start = time.time()
@@ -203,7 +203,7 @@ def get_info():
 @app.route('/starts', methods=['POST'])
 def starts():
     rdat = request.form.to_dict()
-    if rdat == {}: rdat = request.json()
+    if rdat == {}: rdat = request.json
     query = rdat["query"]
     data = {}
     if re.match("[a-zA-Z0-9 ]*",query)[0] == query:
@@ -231,7 +231,7 @@ def starts():
 @app.route('/ends', methods=['POST'])
 def ends(query):
     rdat = request.form.to_dict()
-    if rdat == {}: rdat = request.json()
+    if rdat == {}: rdat = request.json
     query = rdat["query"]
     data = {}
     if re.match("[a-zA-Z0-9 ]*",query)[0] == query:
@@ -261,7 +261,7 @@ def ends(query):
 @app.route('/sqc/encode', methods=['POST'])
 def sqcEncode(query):
     rdat = request.form.to_dict()
-    if rdat == {}: rdat = request.json()
+    if rdat == {}: rdat = request.json
     query = rdat["query"]
     data = {}
     data['req'] = {'query':query}
@@ -272,7 +272,7 @@ def sqcEncode(query):
 @app.route('/sqc/decode', methods=['POST'])
 def sqcDecode(query):
     rdat = request.form.to_dict()
-    if rdat == {}: rdat = request.json()
+    if rdat == {}: rdat = request.json
     query = rdat["query"]
     data = {}
     data['req'] = {'query':query}
@@ -289,7 +289,7 @@ def sqcDecode(query):
 @app.route('/ratio', methods=['POST'])
 def simst():
     rdat = request.form.to_dict()
-    if rdat == {}: rdat = request.json()
+    if rdat == {}: rdat = request.json
     base = rdat["base"]
     compare = rdat["compare"]
 
@@ -305,7 +305,7 @@ def simst():
 # @app.route('/eval', methods=['POST'])
 # def ev():
 #     rdat = request.form.to_dict()
-#     if rdat == {}: rdat = request.json()
+#     if rdat == {}: rdat = request.json
 #     print(rdat)
 #     code = rdat["code"].replace("\\n","\n")
 #     lang = rdat["lang"]
