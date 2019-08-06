@@ -370,7 +370,7 @@ def ip(): # Based on openNAMU ip_check
     return str(ip)
 
 def response(res):
-    if "UptimeRobot" in request.user_agent:
+    if "UptimeRobot" in "{}".format(request.user_agent):
         return res
     if request.method == "GET":
         logger.info("{} got".format(ip()))
