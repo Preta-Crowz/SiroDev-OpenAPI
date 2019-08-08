@@ -55,7 +55,7 @@ url = [
     {'code':'k25','name':'끄투25시','url':'http://kt24.playts.net/'}
 ]
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def help():
     return response(render_template("index.html"))
 
