@@ -301,47 +301,101 @@ def simst():
 
     return response(data)
 
-# Disabled until V2
-# @app.route('/eval', methods=['POST'])
-# def ev():
-#     rdat = request.form.to_dict()
-#     if rdat == {}: rdat = request.json
-#     print(rdat)
-#     code = rdat["code"].replace("\\n","\n")
-#     lang = rdat["lang"]
-#     if lang not in ["js","py"]:
-#         logger.log(f"{lang} is not aviliable")
-#         return response("Unknown Language")
-#     elif lang == "js":
-#         try:
-#             code = base64.b64encode(code.encode("raw_unicode_escape"))
-#             code = eval("\"" + str(code)[2:-1] + "\"")
-#             ctx = execjs.compile(f"dec=require(\"Base64\").atob;delete require;x=Function(dec(\"{code}\"));delete dec")
-#             data = ctx.call("x")
-#             logger.info(code)
-#             logger.info(data)
-#         except execjs._exceptions.ProgramError as e:
-#             e = str(e).replace("\\n","\n")
-#             logger.error(e)
-#             return response(e)
-#         except execjs._exceptions.ProcessExitedWithNonZeroStatus as e:
-#             logger.error(e.stderr)
-#             return response(e.stderr)
-#     elif lang == "py":
-#         try:
-#             tree = ast.parse(code)
-#             eval_expr = ast.Expression(tree.body[-1].value)
-#             exec_expr = ast.Module(tree.body[:-1])
-#             exec(compile(exec_expr,'file','exec'),{})
-#             data = eval(compile(eval_expr,'file','eval'),{})
-#             data = str(data)
-#         except Exception as e:
-#             logger.error(e)
-#             return response(str(e))
-#     else:
-#         return "Unknown Error"
 
-#     return response(json.dumps(data))
+langList = [
+    'c',
+    'cpp',
+    'objective-c',
+    'java',
+    'kotlin',
+    'scala',
+    'swift',
+    'csharp',
+    'go',
+    'haskell',
+    'erlang',
+    'perl',
+    'python',
+    'python3',
+    'ruby',
+    'php',
+    'bash',
+    'r',
+    'javascript',
+    'coffeescript',
+    'vb',
+    'cobol',
+    'fsharp',
+    'd',
+    'clojure',
+    'elixir',
+    'mysql',
+    'rust',
+    'scheme',
+    'commonlisp',
+    'plain'
+]
+
+aliasLangs = {
+    'c++': 'cpp',
+    'objc': 'objective-c',
+    'c#': 'csharp',
+    'python2': 'python',
+    'py': 'python3',
+    'py2': 'python',
+    'py3': 'python3',
+    'js': 'javascript',
+    'cs': 'csharp',
+    'f#': 'fsharp',
+    'fs': 'fsharp',
+    'sql': 'mysql',
+    'lisp': 'commonlisp'
+}
+
+
+@app.route('/eval', methods=['POST'])
+def ev():
+    global langList
+    global aliasLangs
+    rdat = request.form.to_dict()
+    if rdat == {}: rdat = request.json
+    print(rdat)
+    code = rdat["code"].replace("\\n","\n")
+    lang = rdat["lang"]
+    stdin = rdat.get("stdin",[])
+    if lang not in langList + list(aliasLangs.keys()):
+        logger.warning(f"{lang} is not aviliable on Paiza")
+        return response("Unknown Language")
+    else:
+        if lang in list(aliasLangs.keys()):
+            lang = aliasLangs[lang]
+        pdat = {
+            "source_code": code,
+            "language": lang,
+            "input": stdin,
+            "longpoll": True,
+            "longpoll_timeout": 1000,
+            "api_key": "guest"
+        }
+        base = json.loads(requests.post("http://api.paiza.io/runners/create",data=pdat).text)
+        if base["status"] != "completed":
+            while True:
+                check = json.loads(requests.get("http://api.paiza.io/runners/get_details",params={"id":base["id"],"api_key":"guest"}).text)["status"]
+                if check == "completed": break
+        gdata = json.loads(requests.get("http://api.paiza.io/runners/get_details",params={"id":base["id"],"api_key":"guest"}).text)
+        data = {
+            "stdout": gdata["stdout"],
+            "stderr": gdata["stderr"],
+            "exit": gdata["exit_code"],
+            "time": gdata["time"]
+            }
+    return response(json.dumps(data))
+
+@app.route('/lang', methods=['GET','POST'])
+def evlang():
+    global langList
+    global aliasLangs
+    return response(json.dumps({"langs":langList,"alias":aliasLangs}))
 
 
 # @app.route('/<path:ldir>')
