@@ -1,11 +1,11 @@
 {
     "RAVEN":{
-        "KEY": "",
-        "SECRET": "",
+        "KEY": "GET CLIENT INFO FROM SENTRY.IO",
+        "SECRET": "", 
         "PROJECT": ""
-    }, // You "should" get keys from sentry.io
+    },
     "APPNAME": "OpenAPI",
     "LOG": 0,
     "HOST" : "0.0.0.0",
-    "PORT" : 20
+    "PORT" : 80
 }
