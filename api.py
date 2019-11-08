@@ -229,7 +229,7 @@ def starts():
     return response(data)
 
 @app.route('/ends', methods=['POST'])
-def ends(query):
+def ends():
     rdat = request.form.to_dict()
     if rdat == {}: rdat = request.json
     query = rdat["query"]
@@ -259,7 +259,7 @@ def ends(query):
 
 
 @app.route('/sqc/encode', methods=['POST'])
-def sqcEncode(query):
+def sqcEncode():
     rdat = request.form.to_dict()
     if rdat == {}: rdat = request.json
     query = rdat["query"]
@@ -270,7 +270,7 @@ def sqcEncode(query):
     return response(data)
 
 @app.route('/sqc/decode', methods=['POST'])
-def sqcDecode(query):
+def sqcDecode():
     rdat = request.form.to_dict()
     if rdat == {}: rdat = request.json
     query = rdat["query"]
