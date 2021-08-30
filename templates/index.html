@@ -1,40 +1,39 @@
 <h1>SiroDev OpenAPI</h1>
-post로 전송할 내용이 없는 경우에만 get 요청을 사용 가능합니다. 그 외의 경우는 post 요청만을 허용합니다.<br />
-오류 신고 및 문의 : <a href="https://open.kakao.com/me/nko">https://open.kakao.com/me/nko</a>
-<h2>스퀘어크립트 API</h2>
+<div class="translate" id="noget">post로 전송할 내용이 없는 경우에만 get 요청을 사용 가능합니다. 그 외의 경우는 post 요청만을 허용합니다.</div>
+<div class="translate" id="report">오류 신고 및 문의 : <a href="https://open.kakao.com/me/nko">https://open.kakao.com/me/nko</a></div>
+<h2 class="translate" id="sqc">스퀘어크립트 API</h2>
 <ul>
-  <li>/sqc/encode - 입력받은 문자열을 암호화합니다.
+  <li class="translate" id="sqc.enc">/sqc/encode - 입력받은 문자열을 암호화합니다.
     <ul>
-        <li>query - 암호화할 문자열입니다.</li>
+        <li class="translate" id="sqc.enc.query">query - 암호화할 문자열입니다.</li>
     </ul>
   </li>
-  <li>/sqc/decode- 입력받은 암호를 복호화합니다.
+  <li class="translate" id="sqc.dec">/sqc/decode- 입력받은 암호를 복호화합니다.
     <ul>
-        <li>query - 복호화할 문자열입니다.</li>
+        <li class="translate" id="sqc.dec.query">query - 복호화할 문자열입니다.</li>
     </ul>
   </li>
 </ul>
 <br>
-<h2>기타 챗봇 유틸리티</h2>
+<h2 class="translate" id="util">기타 유틸리티</h2>
 <ul>
-  <li>/ratio - 두 문자열을 받아, 유사도를 검사합니다.
+  <li class="translate" id="util.ratio">/ratio - 두 문자열을 받아, 유사도를 검사합니다.
     <ul>
-        <li>base - 비교할 첫 번째 문자열입니다.</li>
-        <li>compare - 비교할 두 번째 문자열입니다.</li>
+        <li class="translate" id="util.base">base - 비교할 첫 번째 문자열입니다.</li>
+        <li class="translate" id="util.compare">compare - 비교할 두 번째 문자열입니다.</li>
     </ul>
   </li>
-  <li>/lang - eval에서 사용 가능한 언어 목록을 확인합니다.</li>
-  <li>/eval - 주어진 코드를 실행합니다. Paiza API를 이용합니다.
+  <li class="translate" id="util.lang">/lang - eval에서 사용 가능한 언어 목록을 확인합니다.</li>
+  <li class="translate" id="util.eval">/eval - 주어진 코드를 실행합니다. Paiza API를 이용합니다.
     <ul>
-        <li>code - 실행할 코드입니다.</li>
-        <li>lang - 해당 코드를 실행할 언어입니다.</li>
-        <li>stdin - 입력이 필요한 코드에서 입력할 내용입니다. (필수 아님)</li>
+        <li class="translate" id="util.eval.code">code - 실행할 코드입니다.</li>
+        <li class="translate" id="util.eval.lang">lang - 해당 코드를 실행할 언어입니다.</li>
+        <li class="translate" id="util.eval.stdin">stdin - 입력이 필요한 코드에서 입력할 내용입니다. (필수 아님)</li>
     </ul>
   </li>
 </ul>
 
-<div style='color: #666;'>
-SiroDev OpenAPI Copyright (C) 2017-2021 菖蒲 小心(preta@siro.dev)<br />
-이 프로그램은 제품에 대한 어떠한 형태의 보증도 제공되지 않습니다.<br />
-이 프로그램은 자유 소프트웨어이며 배포 규정을 만족시키는 조건 아래 자유롭게 재배포할 수 있습니다.<br />
-이에 대한 자세한 사항은 본 프로그램의 구현을 담은 다음 레포지토리에서 확인하십시오: <a target='_blank' href='https://github.com/Preta-Crowz/SiroDev-OpenAPI'>https://github.com/Preta-Crowz/SiroDev-OpenAPI</a></div>
+<div>
+  <div>SiroDev OpenAPI Copyright (C) 2017-2021 菖蒲 小心(preta@siro.dev)</div>
+  <a target='_blank' href='https://github.com/Preta-Crowz/SiroDev-OpenAPI'>https://github.com/Preta-Crowz/SiroDev-OpenAPI</a>
+</div>
